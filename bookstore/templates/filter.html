@@ -1,0 +1,41 @@
+
+{% extends 'base.html' %}
+{% load bootstrap %}
+
+{% block content %}
+
+
+<hr>
+
+
+<div class="row">
+    <form method = "GET">
+        {{filter.form|bootstrap}}
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+    {% for each in filter.qs %}
+    <div class="col">
+        <div class="card" style="width: 13rem;">
+            <img src="{{ each.image_url }}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{ each.title|slice:":25"}} ...</h5>
+                <p class="card-text">${{ each.price|floatformat:2 }}</p>                
+                {% if each.book_available is True %}
+                <li class="text-primary">Available</li>
+                {% else %}
+                <li class="text-danger">Out of Stock !</li>
+                {% endif %}<br>
+                <a href="{% url 'detail' each.id %}" class="btn btn-primary">View</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<style>
+    .card {
+            margin-bottom: 1.5rem;
+        }
+</style>
+
+{% endblock content %}
+

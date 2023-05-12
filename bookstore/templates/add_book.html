@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Add Book
+{% endblock %}
+{% block content %}
+  {% if request.user.is_authenticated %}
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 mx-auto">
+          <h1 class="text-center" style="background-image: linear-gradient(90deg, #219623 1.98%, #f7acff 43.89%, #000000 87.36%);
+          background-clip: text;
+          -webkit-background-clip: text;
+          color: transparent;">Add Book</h1>
+          <form method="post" enctype="multipart/form-data" action="{% url 'add_book' %}">
+            {% csrf_token %}
+            <div class="border p-4">
+              <div class="form-group">
+                <label for="{{ form.title.id_for_label }}">Title :</label>
+                {{ form.title }}
+              </div>
+              <div class="form-group">
+                <label for="{{ form.author.id_for_label }}">Author :</label>
+                {{ form.author }}
+              </div>
+              <div class="form-group">
+                <label for="{{ form.description.id_for_label }}">Description :</label>
+                {{ form.description }}
+              </div>
+              <div class="form-group">
+                <label for="{{ form.price.id_for_label }}">Price :</label>
+                {{ form.price }}
+              </div>
+              <div class="form-group">
+                <label for="{{ form.image_url.id_for_label }}">Image_URL :</label>
+                {{ form.image_url }}
+              </div>
+              <div class="form-group">
+                <label for="{{ form.follow_author.id_for_label }}">Follow_author :</label>
+                {{ form.follow_author }}
+              </div>  
+              <div class="form-group">
+                <label for="{{ form.book_available.id_for_label }}">Book_available :</label>
+                {{ form.book_available }}
+              </div> 
+              <div class="form-group">
+                <label for="{{ form.genre.id_for_label }}">Genre :</label>
+                {{ form.genre }}
+              </div> 
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+              </div>
+              
+              <button type="submit" class="btn btn-primary btn-block">Отправить</button>
+            </div>
+          </form>
+          {% if error %}
+            <div class="alert alert-danger mt-3" role="alert">{{ error }}</div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  {% else %}
+    <h1>Please, <a href="{% url 'login' %}">login</a></h1>
+  {% endif %}
+
+
+  <style>
+    label, h1{
+        background-image: linear-gradient(90deg, #F0B64D 1.98%, #D778B3 43.89%, #5E6BF5 87.36%);
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+    }
+    form {
+      margin: 0 auto;
+      max-width: 600px;
+      margin-top: 80px;
+      background-color: transparent;
+      text-align: center;
+    }
+
+    .form-label {
+      font-weight: 600;
+      background-image: linear-gradient(90deg, #F0B64D 1.98%, #D778B3 43.89%, #5E6BF5 87.36%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .btn {
+      font-weight: 600;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      border-radius: 50px;
+      font-size: 16px;
+      background-color: #f8f9fa;
+      border: none;
+    }
+
+    button[type="submit"] {
+      border-radius: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background: linear-gradient(90deg, #d602ba 1.98%, #841393 43.89%, #5E6BF5 87.36%);
+      border: none;
+      transition: all 0.2s ease-in-out;
+    }
+
+    button[type="submit"]:hover {
+      background: linear-gradient(90deg, #933cc9 1.98%, #380e69 43.89%, #6b74cc 87.36%);
+      transform: translateY(-2px);
+    }
+    .border {
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia&effect=neon|outline|emboss|shadow-multiple">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+{% endblock %}
